@@ -1,0 +1,13 @@
+﻿ul.cstgame-listing { position:relative; padding:0px; margin:0px; }
+ul.cstgame-listing li {  border:1px solid #CCC; list-style:none; text-align:center;line-height:150px; position:absolute; font-size:40px; }
+ul.cstgame-listing li, .flip-container, .front, .back { height:150px; width:150px; }
+ul.cstgame-listing li.completed { transform:scale(0.0); -webkit-transform:scale(0.0); -moz-transform:scale(0.0); -o-transform:scale(0.0); -webkit-transition: all 0.5s  ease-out 0.6s; -moz-transition: all 0.5s ease-out 0.6s; -o-transition: all 0.5s ease-out 0.6s; transition: all 0.5s ease-out 0.6s; }
+.you-win.fade-in { opacity:1; -webkit-transition: all 0.5s  ease-out 0.6s; -moz-transition: all 0.5s ease-out 0.6s; -o-transition: all 0.5s ease-out 0.6s; transition: all 0.5s ease-out 0.6s; position:absolute; left:0; right:0; top:0; bottom:0; text-align:center; margin:auto; line-height:40px; height:40px; font-size:40px; }
+/* FLIP ANIMATION */
+.flip-container { perspective: 1000; }
+.flip-container.active .flipper, .flip-container.active .flipper { transform: rotateY(180deg); -moz-transform: rotateY(180deg); -webkit-transform: rotateY(180deg); -o-transform: rotateY(180deg); }
+.flipper { transition: 0.6s; -moz-transition: 0.6s; -webkit-transition: 0.6s; -o-transition: 0.6s; transform-style: preserve-3d; -moz-transform-style: preserve-3d; -webkit-transform-style: preserve-3d; -o-transform-style: preserve-3d; position: relative; }
+.front, .back { backface-visibility: hidden; position: absolute; top: 0; left: 0; } 
+.front { z-index: 2; transform: rotateY(0deg); }
+.back { transform: rotateY(180deg); }
+.you-win { opacity:0; }
