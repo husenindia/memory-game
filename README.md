@@ -1,3 +1,4 @@
+VIEW DEMO : https://cdn.rawgit.com/husenindia/memory-game/master/memorygame.html
 STEPs Involved in developing memory game : 
 
         // Step 1 : create random list having diffrent numbers  
