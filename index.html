@@ -1,19 +1,73 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<!-- JQUERY 1.11.0 LIBRARY FILE -->
-<script src="js/jquery.min.js"></script>
-<!-- MODAL JS AND CSS -->
-<script src="js/customize-memorygame.js"></script>
-<link href="css/customize-memorygame.css" rel="stylesheet" type="text/css" />
+    <!-- JQUERY 1.11.0 LIBRARY FILE -->
+    <script src="js/jquery.min.js"></script>
+    <!-- MODAL JS AND CSS -->
+    <script src="js/customize-memorygame.js"></script>
+    <link href="css/customize-memorygame.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
+
+
+    <h1>Memory card Game by Husen Telwala</h1>
+    <div class="game-controls">
+        <div class="control-group">
+            <label for="cardCount">
+                Number of cards:
+                <span id="cardCountValue">12</span>
+            </label>
+            <input type="range" id="cardCount" min="2" max="60" value="12">
+        </div>
+        <div class="control-group">
+            <label for="cardsPerRow">
+                Number of cards per row:
+                <span id="cardsPerRowValue">4</span>
+            </label>
+            <input type="range" id="cardsPerRow" min="1" max="10" value="4">
+        </div>
+
+        <button id="customizeGameBtn">
+            Customize Your Game
+        </button>
+    </div>
+
+    <div id="memory-game"></div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
     
-<script>
-    jQuery('body').cstMemoryGame({
-        genrateTotalRandom: 20,
-        totolColumnPerLine: 5
-    });
-</script>
+    <script>
+        
+        jQuery(function ($) {
+
+            $('body').cstMemoryGame({
+                genrateTotalRandom: 60,
+                totolColumnPerLine: 10
+            });
+
+
+            $('#customizeGameBtn').on('click', function () {
+                // INPUT VALUE CAPTURE
+                const cardCount = document.getElementById("cardCount").value;
+                const cardsPerRow = document.getElementById("cardsPerRow").value;
+                $("#memory-game").find(".main-container").remove();
+                $('body').cstMemoryGame({
+                    genrateTotalRandom: cardCount,
+                    totolColumnPerLine: cardsPerRow
+                });
+                lucide.createIcons();
+            });
+            lucide.createIcons();
+        });
+
+    </script>
+    
+
 </body>
+
 </html>

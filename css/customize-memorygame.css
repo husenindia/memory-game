@@ -1,13 +1,247 @@
-﻿ul.cstgame-listing { position:relative; padding:0px; margin:0px; }
-ul.cstgame-listing li {  border:1px solid #CCC; list-style:none; text-align:center;line-height:150px; position:absolute; font-size:40px; }
-ul.cstgame-listing li, .flip-container, .front, .back { height:150px; width:150px; }
-ul.cstgame-listing li.completed { transform:scale(0.0); -webkit-transform:scale(0.0); -moz-transform:scale(0.0); -o-transform:scale(0.0); -webkit-transition: all 0.5s  ease-out 0.6s; -moz-transition: all 0.5s ease-out 0.6s; -o-transition: all 0.5s ease-out 0.6s; transition: all 0.5s ease-out 0.6s; }
-.you-win.fade-in { opacity:1; -webkit-transition: all 0.5s  ease-out 0.6s; -moz-transition: all 0.5s ease-out 0.6s; -o-transition: all 0.5s ease-out 0.6s; transition: all 0.5s ease-out 0.6s; position:absolute; left:0; right:0; top:0; bottom:0; text-align:center; margin:auto; line-height:40px; height:40px; font-size:40px; }
+﻿body {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    text-align: center;
+    background: linear-gradient(135deg,
+            #0f172a,
+            #1e293b,
+            #334155);
+    color: #FFF;
+}
+
+ul.cstgame-listing {
+    margin: auto;
+    padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    
+    justify-content: center;
+}
+
+ul.cstgame-listing li {
+    list-style: none;
+    text-align: center;
+    line-height: 150px;
+    position: static;
+    font-size: 40px;
+    margin: 5px;
+}
+
+ul.cstgame-listing li,
+.flip-container,
+.front,
+.back {
+    height: 150px;
+    width: 150px;
+}
+
+ul.cstgame-listing li.completed {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+    -moz-transform: scale(0.0);
+    -o-transform: scale(0.0);
+    -webkit-transition: all 0.5s ease-out 0.6s;
+    -moz-transition: all 0.5s ease-out 0.6s;
+    -o-transition: all 0.5s ease-out 0.6s;
+    transition: all 0.5s ease-out 0.6s;
+}
+
+.you-win.fade-in {
+    opacity: 1;
+    -webkit-transition: all 0.5s ease-out 0.6s;
+    -moz-transition: all 0.5s ease-out 0.6s;
+    -o-transition: all 0.5s ease-out 0.6s;
+    transition: all 0.5s ease-out 0.6s;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    margin: auto;
+    line-height: 40px;
+    height: 40px;
+    font-size: 40px;
+}
+
 /* FLIP ANIMATION */
-.flip-container { perspective: 1000; }
-.flip-container.active .flipper, .flip-container.active .flipper { transform: rotateY(180deg); -moz-transform: rotateY(180deg); -webkit-transform: rotateY(180deg); -o-transform: rotateY(180deg); }
-.flipper { transition: 0.6s; -moz-transition: 0.6s; -webkit-transition: 0.6s; -o-transition: 0.6s; transform-style: preserve-3d; -moz-transform-style: preserve-3d; -webkit-transform-style: preserve-3d; -o-transform-style: preserve-3d; position: relative; }
-.front, .back { backface-visibility: hidden; position: absolute; top: 0; left: 0; } 
-.front { z-index: 2; transform: rotateY(0deg); }
-.back { transform: rotateY(180deg); }
-.you-win { opacity:0; }
+.flip-container {
+    perspective: 1000;
+}
+
+.flip-container.active .flipper,
+.flip-container.active .flipper {
+    transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+}
+
+.flipper {
+    transition: 0.6s;
+    -moz-transition: 0.6s;
+    -webkit-transition: 0.6s;
+    -o-transition: 0.6s;
+    transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    position: relative;
+}
+
+.front,
+.back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.front {
+    z-index: 2;
+    transform: rotateY(0deg);
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 300;
+    background: linear-gradient(135deg,
+            #ff512f,
+            #dd2476);
+    border-radius: 22px;
+    box-shadow:
+        0 15px 35px rgba(221, 36, 118, 0.35);
+    overflow: hidden;
+
+}
+
+.front:after {
+    content: "";
+    position: absolute;
+    width: 180%;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    transform: rotate(-45deg);
+    top: -20px;
+    left: -80%;
+}
+
+.back {
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg,
+            #9333ea,
+            #c026d3);
+    border-radius: 22px;
+    box-shadow:
+        0 15px 35px rgba(15, 23, 42, 0.35);
+    color: #f8fafc;
+    /* Lucide icon color */
+    border: 2px solid rgba(255, 255, 255, 0.15);
+
+}
+
+.cst-icon {
+    color: #f8fafc;
+    width: 48px;
+    height: 48px;
+}
+
+.you-win {
+    opacity: 0;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: 1px;
+
+  color: #f8fafc;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.15),
+    0 0 30px rgba(255,255,255,0.08);
+}
+
+h1:after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 4px;
+  margin: 12px auto 0;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    #ff512f,
+    #dd2476,
+    #c026d3
+  );
+}
+
+
+.game-controls {
+  width: min(500px, 90%);
+  margin: 0 auto 40px;
+  padding: 24px;
+
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+}
+
+.control-group {
+  margin-bottom: 20px;
+}
+
+.control-group label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 10px;
+
+  color: #f8fafc;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.control-group span {
+  color: #d946ef;
+}
+
+.control-group input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+}
+
+#customizeGameBtn {
+  width: 100%;
+  padding: 14px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #7e22ce,
+    #c026d3
+  );
+
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#customizeGameBtn:hover {
+  transform: translateY(-2px);
+}

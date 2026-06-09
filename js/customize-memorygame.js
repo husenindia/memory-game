@@ -1,6 +1,6 @@
 /*************************/
 /***** AUTHOR : HUSENTELWALA
-/***** DATE : 01-06-2016 : (DF mm-dd-yyyy)
+/***** DATE : 01-06-2024 : (DF mm-dd-yyyy)
 /*************************/
 (function( $ ){
   $.fn.cstMemoryGame = function( options ) {  
@@ -24,24 +24,75 @@
 
         // Step 5 : After fadeout of all the numbers game will be finished, write text you win
 
+		
 
         if (options) {
 			$.extend( settings, options );
 		}
-
+		const cardWidth = 150;
+		const cardGap = 5;
+		const totalWidthPerCardIncludingOuterSpace = cardWidth + (cardGap * 2);
         var genrateTotalRandom = settings.genrateTotalRandom;
         var totolColumnPerLine = settings.totolColumnPerLine;
 		var randomArrayValue = [];
 		var randomArrayPosition = [];
 		var finalArray = [];
-		var commonSpaceLeft = 0;
-		var commonSpaceTop = 0;
-		$('body').append('<ul class="cstgame-listing"></ul>');
-		$('body').append('<div class="you-win">You Win</div>');
+		var mainContainerWidth =  totalWidthPerCardIncludingOuterSpace * totolColumnPerLine;
+		$('#memory-game').append('<div class="main-container"></div>');
+		$('.main-container').append('<ul style="max-width:' + mainContainerWidth + 'px" class="cstgame-listing"></ul>');
+		$('.main-container').append('<div class="you-win">You Win</div>');
 		tempString = '';
 		var $cstGameListing = $('.cstgame-listing');
 		var totalUniQueNumber = genrateTotalRandom / 2;
 
+
+		// INPUT VALUE TO CUSTOMIZE GAME
+		const cardCount = document.getElementById("cardCount");
+		const cardsPerRow = document.getElementById("cardsPerRow");
+
+		// SET DEFAULT VALUE 
+		document.getElementById("cardCountValue").textContent = genrateTotalRandom;
+		document.getElementById("cardsPerRowValue").textContent = totolColumnPerLine;
+		cardCount.value = genrateTotalRandom;
+		cardsPerRow.value = totolColumnPerLine;
+		
+		
+
+
+
+		var lucideIcons = [
+			'star',
+			'heart',
+			'rocket',
+			'camera',
+			'bell',
+			'home',
+			'gift',
+			'moon',
+			'sun',
+			'cloud',
+			'music',
+			'bookmark',
+			'shield',
+			'flag',
+			'zap',
+			'coffee',
+			'smile',
+			'plane',
+			'crown',
+			'key',
+			'search',
+			'settings',
+			'user',
+			'mail',
+			'phone',
+			'calendar',
+			'lock',
+			'globe',
+			'shopping-cart',
+			'wallet',
+			'compass'
+		];
         /* GERERATE RANDOM ARRAY *****************/
 		var generateRandom = function (totalNumber, min, max) {
 		    var tempArray = [];
@@ -72,8 +123,8 @@
 		}
 		
 		var addCompletedIfEqual = function () {
-		    firstValue = parseInt($cstGameListing.find('li > .flip-container.active').eq(0).find('.back').html());
-		    secondValue = parseInt($cstGameListing.find('li > .flip-container.active').eq(1).find('.back').html());
+		    firstValue = parseInt($cstGameListing.find('li > .flip-container.active').eq(0).find('.back').data('index'));
+		    secondValue = parseInt($cstGameListing.find('li > .flip-container.active').eq(1).find('.back').data('index'));
 
 		    if (firstValue === secondValue) {		        
 		        $cstGameListing.find('li > .flip-container.active').parents('li').addClass('completed');		        
@@ -84,7 +135,7 @@
             return $cstGameListing.find('li.completed').length===genrateTotalRandom;
 		} 
         /* FOR RANDOM VALUE ********************/		
-		randomArrayValue = generateRandom(totalUniQueNumber, 0, 100);
+		randomArrayValue = generateRandom(totalUniQueNumber, 0, (genrateTotalRandom/2));
         
         /* FOR RANDOM POSITION ********************/
 		randomArrayPosition = generateRandom(genrateTotalRandom, 0, genrateTotalRandom-1);
@@ -93,19 +144,14 @@
 		generateFinalRandomArray();
 
 	    $(finalArray).each(function (key, index) {		    
-            tempString += '<li style="left:' + commonSpaceLeft + 'px; top:' + commonSpaceTop + 'px;">'; 
+            tempString += '<li>'; 
             tempString += '<div class="flip-container"><div class="flipper"><div class="front">'; 
-            tempString += '?';
-            tempString += '</div><div class="back">';
-            tempString += index;
+            tempString += '</div><div data-index="'+ index +'" class="back">'; // Main logic to check both number are equal
+
+			tempString += '<i class="cst-icon" data-lucide="'+lucideIcons[index] + '"></i>';
+            
             tempString += '</div></div></div>';
             tempString += '</li>';
-		    commonSpaceLeft += 150;
-		    tempkey = key + 1;
-		    if (tempkey%totolColumnPerLine == 0) {
-		        commonSpaceLeft = 0;
-		        commonSpaceTop += 150;
-		    }
 	    })
 
 		$(tempString).appendTo('ul.cstgame-listing');		
@@ -116,6 +162,7 @@
 		        $('li > .flip-container').removeClass('active');
 		    }
 		    $this.find('.flip-container').addClass('active');
+
 		    if (activeNumberLength === 1) {
 		        addCompletedIfEqual();
 		    }
@@ -123,6 +170,16 @@
 		        $('.you-win').addClass('fade-in');
 		    }
         })
+
+		cardCount.addEventListener("input", () => {
+			document.getElementById("cardCountValue").textContent = cardCount.value;
+		});
+
+		cardsPerRow.addEventListener("input", () => {
+			document.getElementById("cardsPerRowValue").textContent = cardsPerRow.value;
+		});
+
+
     });
   };
 })(jQuery);

@@ -8,12 +8,27 @@
 <link href="css/customize-memorygame.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    
+    <div class="card-front">
+        <i data-lucide="star"></i>
+    </div>
+
+    <div class="card-front">
+        <i data-lucide="heart"></i>
+    </div>
+
+    <div class="card-front">
+        <i data-lucide="rocket"></i>
+    </div>
+
 <script>
     jQuery('body').cstMemoryGame({
         genrateTotalRandom: 20,
         totolColumnPerLine: 5
     });
+</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  lucide.createIcons();
 </script>
 </body>
 </html>
